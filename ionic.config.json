@@ -1,0 +1,7 @@
+{
+  "name": "Youtub",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
