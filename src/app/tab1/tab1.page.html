@@ -1,17 +1,64 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Student Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+    <!-- Name Field -->
+    <ion-item>
+      <ion-label position="floating">Full Name</ion-label>
+      <ion-input type="text" formControlName="name" clearInput></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="name?.touched && name?.invalid">
+      <p *ngIf="name?.errors?.['required']">Name is required.</p>
+      <p *ngIf="name?.errors?.['minlength']">Name must be at least 3 characters long.</p>
+    </ion-text>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <!-- Email Field -->
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email" clearInput></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="email?.touched && email?.invalid">
+      <p *ngIf="email?.errors?.['required']">Email is required.</p>
+      <p *ngIf="email?.errors?.['email']">Enter a valid email.</p>
+    </ion-text>
+
+    <!-- Password Field -->
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" clearInput></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="password?.touched && password?.invalid">
+      <p *ngIf="password?.errors?.['required']">Password is required.</p>
+      <p *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</p>
+    </ion-text>
+
+    <!-- Age Field -->
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input type="number" formControlName="age" clearInput></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="age?.touched && age?.invalid">
+      <p *ngIf="age?.errors?.['required']">Age is required.</p>
+      <p *ngIf="age?.errors?.['min']">Age must be at least 18.</p>
+    </ion-text>
+
+    <!-- Phone Number Field -->
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="phone?.touched && phone?.invalid">
+      <p *ngIf="phone?.errors?.['required']">Phone number is required.</p>
+      <p *ngIf="phone?.errors?.['pattern']">Enter a valid 10-digit phone number.</p>
+    </ion-text>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" type="submit" [disabled]="registrationForm.invalid">
+      Register
+    </ion-button>
+  </form>
 </ion-content>
